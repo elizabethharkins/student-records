@@ -1,0 +1,138 @@
+/* ************ BASIC SETUP ************ */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
+$primary: #0268a8;
+$grayscale: grayscale($primary);
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: $grayscale;
+  margin: 2em auto;
+  max-width: 80vw;
+  // base font-size must be declared in body 
+  // for the rem converter to work
+  font-size: 100%;
+}
+
+h2 {
+  margin-top: 2em;
+  
+  &:first-of-type {
+    margin-top: 1em;
+  }
+}
+
+.header {
+  border-bottom: 1px solid $grayscale;
+  align-items: baseline;
+  margin-bottom: 2em;
+  padding-bottom: unset;
+}
+
+.primary {
+  color: $primary;
+}
+
+.table {
+  color: $grayscale;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: #e9f2f7;
+  color: #899796;
+}
+.table td .btn {
+  padding: unset;
+}
+
+form > * {
+  padding: 0.25em 0;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="number"]::placeholder {
+  color: #d3d3d3;
+  font-size: 0.9em;
+}
+
+.nav-link,
+.btn-link {
+  color: $primary;
+}
+
+/* ************ MIXINS ************ */
+
+// adds font-size in rem & px
+// value passed should be the expected px size
+// default value 12 - can be customized to fit project
+@mixin font-size($sizeValue: 12) {
+	font-size: $sizeValue + px; // fallback
+	font-size: (0.0625 * $sizeValue) + rem;
+}
+
+// adds line-height in rem & px
+// value passed should be the expected px size
+// default value 20 - can be customized to fit project
+@mixin line-height($heightValue: 20) {
+	line-height: $heightValue + px; // fallback
+	line-height: (0.0625 * $heightValue) + rem;
+}
+
+// rhythm adds font-size and line-height in rem with a px fallback
+// value passed should be the expected px size
+// default values 12, 20 - can be customized to fit project
+@mixin rhythm($sizeValue: 12, $heightValue: 20) {
+	@include font-size($sizeValue);
+	@include line-height($heightValue);
+}
+
+/* ************ IN USE ************ */
+
+h1 {
+  @include rhythm(36, 40);
+  /*
+  compiles to:
+  
+  font-size: 36px;
+  font-size: 2.25rem;
+  line-height: 40px;
+  line-height: 2.5rem;
+  */
+}
+
+h2 {
+  @include rhythm(26, 30);
+  /*
+  compiles to:
+  
+  font-size: 26px;
+  font-size: 1.625rem;
+  line-height: 30px;
+  line-height: 1.875rem;
+  */
+}
+
+h3 {
+  @include rhythm(22, 26);
+  /*
+  compiles to:
+  
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 26px;
+  line-height: 1.625rem;
+  */
+}
+
+p, a {
+  @include rhythm(15, 20);
+  /*
+  compiles to:
+  
+  font-size: 15px;
+  font-size: 0.9375rem;
+  line-height: 20px;
+  line-height: 1.25rem;
+  */
+}
+
